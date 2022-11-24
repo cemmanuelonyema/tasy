@@ -1,0 +1,33 @@
+.header {
+}
+
+.header__container {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.task-function {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.task-function input {
+  width: 70%;
+  padding: 1.2rem;
+  border-radius: 1.2rem;
+  border: none;
+  outline: none;
+
+  background-color: #f7f7f7;
+}
+
+.task-function button {
+  width: 30%;
+  padding: 1.2rem;
+  border-radius: 1.2rem;
+}
