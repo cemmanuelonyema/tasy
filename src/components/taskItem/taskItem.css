@@ -1,0 +1,21 @@
+.taskItem {
+  padding: 1.2rem;
+  border: 1px solid black;
+
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.task-content {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
