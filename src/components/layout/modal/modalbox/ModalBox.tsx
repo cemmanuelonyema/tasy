@@ -1,7 +1,18 @@
-import React from "react";
+import { useState } from "react";
+import { Todo } from "../../../model";
 import "./modalbox.css";
 
-export const ModalBox = () => {
+export const ModalBox: React.FC = () => {
+  //   const [todo, setTodo] = useState<string>("");
+  const [todo, setTodo] = useState({
+    todo: "",
+    des: "",
+    tag: "",
+  });
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  console.log(todo);
+
   return (
     <div className="modalbox">
       <form className="form">
@@ -14,7 +25,12 @@ export const ModalBox = () => {
           </select>
         </div>
         <div>
-          <input type="text" placeholder="Task name" />
+          <input
+            type="text"
+            placeholder="Task name"
+            value={todo.todo}
+            onChange={(e) => setTodo(e.target.value)}
+          />
           <textarea placeholder=" Task Description(optional)" />
         </div>
 
