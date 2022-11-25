@@ -5,16 +5,22 @@ import "./modalbox.css";
 interface Props {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-export const ModalBox: React.FC<Props> = ({ setModalOpen, modalOpen }) => {
+export const ModalBox: React.FC<Props> = ({
+  setModalOpen,
+  modalOpen,
+  setTodos,
+  todos,
+}) => {
   const [todo, setTodo] = useState<string>("");
   //   const [todo, setTodo] = useState({
   //     todo: "",
   //     des: "",
   //     tag: "",
   //   });
-  const [todos, setTodos] = useState<Todo[]>([]);
 
   console.log(todos);
 
