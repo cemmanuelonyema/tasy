@@ -1,7 +1,7 @@
 import "./App.css";
 
-export const App = () => {
-  return <div className="App"></div>;
+export const App: React.FC = () => {
+  return <main className="App"></main>;
 };
 
 export default App;
