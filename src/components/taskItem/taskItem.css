@@ -8,6 +8,10 @@
   justify-content: space-between;
 }
 
+.taskItem span {
+  display: block;
+  white-space: nowrap;
+}
 .task-content {
   display: flex;
   gap: 1rem;

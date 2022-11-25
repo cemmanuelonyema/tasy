@@ -13,13 +13,28 @@ export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
   const handleChange = (id: number) => {
     // setContact({ ...contact, [e.target.name]: e.target.value });
     //   setTodos([...todos, { id: Date.now(), todo: todo, isDone: false }]);
+
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+      )
+    );
   };
-  console.log(todo);
   return (
-    <article className="taskItem">
+    <li className="taskItem">
       <div className="task-content">
-        <input type="checkbox" onChange={() => handleChange(todo.id)} />
-        <span>{todo.todo}</span>
+        <input
+          type="checkbox"
+          onChange={() => handleChange(todo.id)}
+          id={todo.todo}
+          name={todo.todo}
+        />
+
+        {todo.isDone ? (
+          <span className="text-complete">{todo.isDone}</span>
+        ) : (
+          <span className="text-todo">{todo.todo}</span>
+        )}
       </div>
       <div className="task-buttons">
         <span className="icon">
@@ -29,6 +44,6 @@ export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
           <FiTrash />
         </span>
       </div>
-    </article>
+    </li>
   );
 };

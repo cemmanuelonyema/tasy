@@ -11,19 +11,7 @@ interface Props {
 export const TaskList: React.FC<Props> = ({ todos, setTodos }) => {
   return (
     <section>
-      <div className="wrapper__container">
-        {/* <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem />
-        <TaskItem /> */}
-        {/* {todos.map((todo) => (
-          <TaskItem key={todo.id} todo={todo} todos={todos}, setTodos={setTodos}/>
-        ))} */}
-
+      <ul className="task-list">
         {todos?.map((todo) => (
           <TaskItem
             key={todo.id}
@@ -32,7 +20,7 @@ export const TaskList: React.FC<Props> = ({ todos, setTodos }) => {
             setTodos={setTodos}
           />
         ))}
-      </div>
+      </ul>
     </section>
   );
 };
