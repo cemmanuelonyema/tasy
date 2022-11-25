@@ -1,0 +1,9 @@
+.wrapper__container {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
