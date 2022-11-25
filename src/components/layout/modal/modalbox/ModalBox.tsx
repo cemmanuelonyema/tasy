@@ -3,19 +3,28 @@ import { Todo } from "../../../model";
 import "./modalbox.css";
 
 export const ModalBox: React.FC = () => {
-  //   const [todo, setTodo] = useState<string>("");
-  const [todo, setTodo] = useState({
-    todo: "",
-    des: "",
-    tag: "",
-  });
+  const [todo, setTodo] = useState<string>("");
+  //   const [todo, setTodo] = useState({
+  //     todo: "",
+  //     des: "",
+  //     tag: "",
+  //   });
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  console.log(todo);
+  console.log(todos);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (todo) {
+      setTodos([...todos, { id: Date.now(), todo: todo, isDone: false }]);
+      setTodo("");
+    }
+  };
 
   return (
     <div className="modalbox">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="box-header">
           <h2>New Task</h2>
           <select name="label">
@@ -28,10 +37,10 @@ export const ModalBox: React.FC = () => {
           <input
             type="text"
             placeholder="Task name"
-            value={todo.todo}
+            value={todo}
             onChange={(e) => setTodo(e.target.value)}
           />
-          <textarea placeholder=" Task Description(optional)" />
+          {/* <textarea placeholder=" Task Description(optional)" /> */}
         </div>
 
         <div className="btns">
