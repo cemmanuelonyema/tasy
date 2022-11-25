@@ -2,7 +2,12 @@ import { useState } from "react";
 import { Todo } from "../../../model";
 import "./modalbox.css";
 
-export const ModalBox: React.FC = () => {
+interface Props {
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const ModalBox: React.FC<Props> = ({ setModalOpen, modalOpen }) => {
   const [todo, setTodo] = useState<string>("");
   //   const [todo, setTodo] = useState({
   //     todo: "",
@@ -16,7 +21,7 @@ export const ModalBox: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (todo) {
+    if (todo !== "") {
       setTodos([...todos, { id: Date.now(), todo: todo, isDone: false }]);
       setTodo("");
     }
@@ -44,7 +49,7 @@ export const ModalBox: React.FC = () => {
         </div>
 
         <div className="btns">
-          <button>Cancel</button>
+          <button onClick={() => setModalOpen(false)}>Cancel</button>
           <button>Add task</button>
         </div>
       </form>

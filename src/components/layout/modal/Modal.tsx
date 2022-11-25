@@ -1,11 +1,20 @@
-import React from "react";
+import React, { useState, Fragment } from "react";
 import "./modal.css";
 import { ModalBox } from "./modalbox/ModalBox";
 
-export const Modal = () => {
+interface Props {
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Modal: React.FC<Props> = ({ setModalOpen, modalOpen }) => {
   return (
-    <section className="overlay">
-      <ModalBox />
-    </section>
+    <Fragment>
+      {modalOpen && (
+        <section className="overlay">
+          <ModalBox setModalOpen={setModalOpen} modalOpen={modalOpen} />
+        </section>
+      )}
+    </Fragment>
   );
 };
