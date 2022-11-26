@@ -1,7 +1,12 @@
 import React from "react";
 import "./header.css";
 
-export const Header: React.FC = () => {
+interface Props {
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const Header: React.FC<Props> = ({ modalOpen, setModalOpen }) => {
   return (
     <header className="header">
       <div className="header__container">
@@ -11,7 +16,7 @@ export const Header: React.FC = () => {
         </div>
         <form className="task-function" onSubmit={(e) => e.preventDefault()}>
           <input type="text" placeholder="Search tasks" />
-          <button>Add a task</button>
+          <button onClick={() => setModalOpen(true)}>Add a task</button>
         </form>
       </div>
     </header>

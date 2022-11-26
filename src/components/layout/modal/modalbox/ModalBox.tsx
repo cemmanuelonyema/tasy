@@ -2,21 +2,32 @@ import { useState } from "react";
 import { Todo } from "../../../model";
 import "./modalbox.css";
 
-export const ModalBox: React.FC = () => {
+interface Props {
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+}
+
+export const ModalBox: React.FC<Props> = ({
+  setModalOpen,
+  modalOpen,
+  setTodos,
+  todos,
+}) => {
   const [todo, setTodo] = useState<string>("");
   //   const [todo, setTodo] = useState({
   //     todo: "",
   //     des: "",
   //     tag: "",
   //   });
-  const [todos, setTodos] = useState<Todo[]>([]);
 
   console.log(todos);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (todo) {
+    if (todo !== "") {
       setTodos([...todos, { id: Date.now(), todo: todo, isDone: false }]);
       setTodo("");
     }
@@ -44,7 +55,7 @@ export const ModalBox: React.FC = () => {
         </div>
 
         <div className="btns">
-          <button>Cancel</button>
+          <button onClick={() => setModalOpen(false)}>Cancel</button>
           <button>Add task</button>
         </div>
       </form>
