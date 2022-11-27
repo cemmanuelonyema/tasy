@@ -10,17 +10,29 @@ interface Props {
 
 export const TaskList: React.FC<Props> = ({ todos, setTodos }) => {
   return (
-    <section>
-      <ul className="task-list">
-        {todos?.map((todo) => (
-          <TaskItem
-            key={todo.id}
-            todo={todo}
-            todos={todos}
-            setTodos={setTodos}
-          />
-        ))}
-      </ul>
+    <section className="tasklist">
+      <div className="tasklist__container">
+        <ul className="tasklist-ul">
+          {todos?.map((todo) => (
+            <TaskItem
+              key={todo.id}
+              todo={todo}
+              todos={todos}
+              setTodos={setTodos}
+            />
+          ))}
+        </ul>
+        <ul className="tasklist-ul">
+          {todos?.map((todo) => (
+            <TaskItem
+              key={todo.id}
+              todo={todo}
+              todos={todos}
+              setTodos={setTodos}
+            />
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };

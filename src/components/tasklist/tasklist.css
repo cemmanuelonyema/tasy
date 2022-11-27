@@ -1,9 +1,15 @@
-.task-list {
+.tasklist-ul {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.tasklist__container {
   max-width: 120rem;
   margin: 0 auto;
   padding: 3rem;
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2.4rem;
 }
