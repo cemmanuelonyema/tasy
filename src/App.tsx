@@ -14,8 +14,18 @@ export const App: React.FC = () => {
     <main className="App">
       <Header setModalOpen={setModalOpen} modalOpen={modalOpen} />
       <Tab />
-      <TaskList todos={todos} setTodos={setTodos} />
-      <Modal setModalOpen={setModalOpen} modalOpen={modalOpen}  todos={todos} setTodos={setTodos}/>
+      <TaskList
+        todos={todos}
+        setTodos={setTodos}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
+      <Modal
+        setModalOpen={setModalOpen}
+        modalOpen={modalOpen}
+        todos={todos}
+        setTodos={setTodos}
+      />
     </main>
   );
 };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { Todo } from "../model";
 import "./taskItem.css";
@@ -7,9 +7,20 @@ interface Props {
   todo: Todo;
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
+export const TaskItem: React.FC<Props> = ({
+  todo,
+  todos,
+  setTodos,
+  modalOpen,
+  setModalOpen,
+}) => {
+  const [edit, setEdit] = useState<boolean>(false);
+  const [editTodo, setEditTodo] = useState<string>(todo.todo);
+
   const handleChange = (id: number) => {
     // setContact({ ...contact, [e.target.name]: e.target.value });
     //   setTodos([...todos, { id: Date.now(), todo: todo, isDone: false }]);
@@ -20,6 +31,16 @@ export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
       )
     );
   };
+
+  const handleDelete = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
+
+  const handleEdit = (id: number) => {
+    setModalOpen(true);
+    setEdit(!edit);
+  };
+
   return (
     <li className="taskItem">
       <div className="task-content">
@@ -29,18 +50,19 @@ export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
           id={todo.todo}
           name={todo.todo}
         />
-
-        {todo.isDone ? (
+        {edit ? (
+          <input />
+        ) : todo.isDone ? (
           <span className="text-complete">{todo.isDone}</span>
         ) : (
           <span className="text-todo">{todo.todo}</span>
         )}
       </div>
       <div className="task-buttons">
-        <span className="icon">
+        <span className="icon" onClick={() => handleEdit(todo.id)}>
           <FiEdit />
         </span>
-        <span className="icon">
+        <span className="icon" onClick={() => handleDelete(todo.id)}>
           <FiTrash />
         </span>
       </div>
