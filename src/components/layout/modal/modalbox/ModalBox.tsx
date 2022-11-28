@@ -5,18 +5,11 @@ import { useDispatch } from "react-redux";
 import { toggleModal } from "../../../../redux/slices/taskSlice";
 
 interface Props {
-  modalOpen: boolean;
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-export const ModalBox: React.FC<Props> = ({
-  setModalOpen,
-  modalOpen,
-  setTodos,
-  todos,
-}) => {
+export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
   const [todo, setTodo] = useState<string>("");
   //   const [todo, setTodo] = useState({
   //     todo: "",

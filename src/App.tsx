@@ -20,12 +20,7 @@ export const App: React.FC = () => {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
       />
-      <Modal
-        setModalOpen={setModalOpen}
-        modalOpen={modalOpen}
-        todos={todos}
-        setTodos={setTodos}
-      />
+      <Modal todos={todos} setTodos={setTodos} />
     </main>
   );
 };
