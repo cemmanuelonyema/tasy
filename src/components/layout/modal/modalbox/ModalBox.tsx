@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Todo } from "../../../model";
 import "./modalbox.css";
+import { useDispatch } from "react-redux";
+import { toggleModal } from "../../../../redux/slices/taskSlice";
 
 interface Props {
   modalOpen: boolean;
@@ -33,6 +35,8 @@ export const ModalBox: React.FC<Props> = ({
     }
   };
 
+  const dispatch = useDispatch();
+
   return (
     <div className="modalbox">
       <form className="form" onSubmit={handleSubmit}>
@@ -55,7 +59,7 @@ export const ModalBox: React.FC<Props> = ({
         </div>
 
         <div className="btns">
-          <button onClick={() => setModalOpen(false)}>Cancel</button>
+          <button onClick={() => dispatch(toggleModal())}>Cancel</button>
           <button>Add task</button>
         </div>
       </form>

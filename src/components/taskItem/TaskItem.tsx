@@ -3,6 +3,9 @@ import { FiEdit, FiTrash } from "react-icons/fi";
 import { Todo } from "../model";
 import "./taskItem.css";
 
+import { useSelector, useDispatch } from "react-redux";
+import { deleteTask } from "../../redux/slices/taskSlice";
+
 interface Props {
   todo: Todo;
   todos: Todo[];
@@ -41,6 +44,9 @@ export const TaskItem: React.FC<Props> = ({
     setEdit(!edit);
   };
 
+  const dispatch = useDispatch();
+  //   dispatch(deleteTask(todo.id));
+
   return (
     <li className="taskItem">
       <div className="task-content">
@@ -62,7 +68,7 @@ export const TaskItem: React.FC<Props> = ({
         <span className="icon" onClick={() => handleEdit(todo.id)}>
           <FiEdit />
         </span>
-        <span className="icon" onClick={() => handleDelete(todo.id)}>
+        <span className="icon" onClick={() => dispatch(deleteTask(todo.id))}>
           <FiTrash />
         </span>
       </div>

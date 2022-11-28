@@ -3,6 +3,9 @@ import { Todo } from "../../model";
 import "./modal.css";
 import { ModalBox } from "./modalbox/ModalBox";
 
+import { useSelector, useDispatch } from "react-redux";
+import { selectIsModalOpen } from "../../../redux/slices/taskSlice";
+
 interface Props {
   modalOpen: boolean;
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,9 +19,10 @@ export const Modal: React.FC<Props> = ({
   setTodos,
   todos,
 }) => {
+  const isModalOpen = useSelector(selectIsModalOpen);
   return (
     <Fragment>
-      {modalOpen && (
+      {isModalOpen && (
         <section className="overlay">
           <ModalBox
             setModalOpen={setModalOpen}

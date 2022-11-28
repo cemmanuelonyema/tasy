@@ -1,6 +1,13 @@
 import { createSlice, createSelector } from "@reduxjs/toolkit";
+import { TaskModel } from "../../models/models";
 
-const initialState = {
+interface TaskState {
+  isModalOpen: boolean;
+  tasks: TaskModel[];
+  completedTasks: TaskModel[];
+}
+
+const initialState: TaskState = {
   isModalOpen: false,
   tasks: [],
   completedTasks: [],
@@ -19,8 +26,10 @@ export const taskSlice = createSlice({
     addTask(state, action) {
       //   state.isModalOpen = !state.isModalOpen;
     },
-    deleteTask(state) {
-      //   state.isModalOpen = !state.isModalOpen;
+    deleteTask(state, action) {
+      state.tasks.filter((task) => task.id !== action.payload);
+      console.log(action.payload);
+      console.log(state);
     },
     completeTask(state) {
       //   state.isModalOpen = !state.isModalOpen;
@@ -28,7 +37,7 @@ export const taskSlice = createSlice({
   },
 });
 
-export const {} = taskSlice.actions;
+export const { toggleModal, editTask, deleteTask, addTask } = taskSlice.actions;
 export default taskSlice.reducer;
 
 //Selectors
