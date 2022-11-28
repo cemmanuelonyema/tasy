@@ -4,7 +4,7 @@ import { Todo } from "../model";
 import "./taskItem.css";
 
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTask } from "../../redux/slices/taskSlice";
+import { deleteTask, toggleModal } from "../../redux/slices/taskSlice";
 
 interface Props {
   todo: Todo;
@@ -35,12 +35,12 @@ export const TaskItem: React.FC<Props> = ({
     );
   };
 
-  const handleDelete = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id !== id));
-  };
+  //   const handleDelete = (id: number) => {
+  //     setTodos(todos.filter((todo) => todo.id !== id));
+  //   };
 
   const handleEdit = (id: number) => {
-    setModalOpen(true);
+    dispatch(toggleModal());
     setEdit(!edit);
   };
 

@@ -25,6 +25,7 @@ export const taskSlice = createSlice({
     },
     addTask(state, action) {
       //   state.isModalOpen = !state.isModalOpen;
+      state.tasks = [action.payload, ...state.tasks];
     },
     deleteTask(state, action) {
       state.tasks.filter((task) => task.id !== action.payload);
@@ -47,3 +48,4 @@ export const selectIsModalOpen = createSelector(
   [selectTask],
   (task) => task.isModalOpen
 );
+export const selectTasks = createSelector([selectTask], (task) => task.tasks);

@@ -1,7 +1,7 @@
-export interface Todo {
+export interface TodoModel {
   id: number;
-  todo: string;
-  //   des: string;
-  //   tag: string;
-  isDone: boolean;
+  taskTitle: string;
+  taskDescription?: string;
+  taskTag?: string;
+  completed: boolean;
 }
