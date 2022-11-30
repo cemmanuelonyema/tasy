@@ -1,7 +1,9 @@
 import React from "react";
+import { selectTask, selectTasks } from "../../redux/slices/taskSlice";
 import { Todo } from "../model";
 import { TaskItem } from "../taskItem/TaskItem";
 import "./tasklist.css";
+import { useSelector } from "react-redux";
 
 interface Props {
   todos: Todo[];
@@ -16,10 +18,24 @@ export const TaskList: React.FC<Props> = ({
   modalOpen,
   setModalOpen,
 }) => {
+  const tasks = useSelector(selectTasks);
+  console.log(tasks);
   return (
     <section className="tasklist">
       <div className="tasklist__container">
         <ul className="tasklist-ul">
+          {tasks?.map((task) => (
+            <TaskItem
+              key={task.id}
+              todo={task}
+              todos={todos}
+              setTodos={setTodos}
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+            />
+          ))}
+        </ul>
+        {/* <ul className="tasklist-ul">
           {todos?.map((todo) => (
             <TaskItem
               key={todo.id}
@@ -30,7 +46,8 @@ export const TaskList: React.FC<Props> = ({
               setModalOpen={setModalOpen}
             />
           ))}
-        </ul>
+        </ul> */}
+
         <ul className="tasklist-ul">
           {/* {todos?.map((todo) => (
             <TaskItem

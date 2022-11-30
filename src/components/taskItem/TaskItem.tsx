@@ -41,7 +41,6 @@ export const TaskItem: React.FC<Props> = ({
 
   const handleEdit = (id: number) => {
     dispatch(toggleModal());
-    setEdit(!edit);
   };
 
   const dispatch = useDispatch();
@@ -61,7 +60,7 @@ export const TaskItem: React.FC<Props> = ({
         ) : todo.isDone ? (
           <span className="text-complete">{todo.isDone}</span>
         ) : (
-          <span className="text-todo">{todo.todo}</span>
+          <span className="text-todo">{todo.title}</span>
         )}
       </div>
       <div className="task-buttons">
