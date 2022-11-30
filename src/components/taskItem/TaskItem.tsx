@@ -14,19 +14,12 @@ interface Props {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const TaskItem: React.FC<Props> = ({
-  todo,
-  todos,
-  setTodos,
-  modalOpen,
-  setModalOpen,
-}) => {
+export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodo, setEditTodo] = useState<string>(todo.todo);
 
   const handleChange = (id: number) => {
     // setContact({ ...contact, [e.target.name]: e.target.value });
-    //   setTodos([...todos, { id: Date.now(), todo: todo, isDone: false }]);
 
     setTodos(
       todos.map((todo) =>

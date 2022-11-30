@@ -10,27 +10,15 @@ interface Props {
 }
 
 export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
-  const [todo, setTodo] = useState<string>("");
-  //   const [todo, setTodo] = useState({
-  //     todo: "",
-  //     des: "",
-  //     tag: "",
-  //   });
-
-  //   console.log(todos);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // if (todo !== "") {
-    //   setTodos([...todos, { id: Date.now(), todo: todo, isDone: false }]);
-    //   setTodo("");
-    // }
     if (task.title !== "") {
       dispatch(addTask(task));
     }
 
     setTask({
+      id: 0,
       title: "",
       description: "",
       tag: "",
@@ -51,8 +39,7 @@ export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
     completed: false,
   });
 
-  const { title, description, tag, completed, id } = task;
-  console.log(task);
+  const { title, description, tag } = task;
 
   return (
     <div className="modalbox">
@@ -74,12 +61,7 @@ export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
             name="title"
             onChange={handleChange}
           />
-          {/* <input
-            type="text"
-            placeholder="Task name"
-            value={todo}
-            onChange={(e) => setTodo(e.target.value)}
-          /> */}
+
           <textarea
             placeholder=" Task Description "
             value={description}

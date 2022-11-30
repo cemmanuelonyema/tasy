@@ -35,18 +35,6 @@ export const TaskList: React.FC<Props> = ({
             />
           ))}
         </ul>
-        {/* <ul className="tasklist-ul">
-          {todos?.map((todo) => (
-            <TaskItem
-              key={todo.id}
-              todo={todo}
-              todos={todos}
-              setTodos={setTodos}
-              modalOpen={modalOpen}
-              setModalOpen={setModalOpen}
-            />
-          ))}
-        </ul> */}
 
         <ul className="tasklist-ul">
           {/* {todos?.map((todo) => (
