@@ -48,12 +48,16 @@ export const taskSlice = createSlice({
     },
     updateTask: (state, action) => {
       console.log(action.payload);
-      const { id } = action.payload[0];
+      const {
+        payload: { id },
+      } = action;
       console.log(id);
       const task = state.tasks.find((task) => task.id === id);
       console.log(current(task));
       if (task) {
-        const { title, description, tag, completed } = action.payload;
+        const {
+          payload: { title, description, tag, completed },
+        } = action;
         task.title = title;
         task.description = description;
         task.tag = tag;
