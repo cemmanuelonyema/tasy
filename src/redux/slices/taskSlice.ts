@@ -63,13 +63,14 @@ export const taskSlice = createSlice({
         task.tag = tag;
         task.completed = completed;
       }
+      state.currentTask = null;
     },
     // updateTask(state, action) {
     //   console.log(action.payload);
     //   //   state.tasks = state.tasks.map((task) =>
     //   //     task.id === action.payload.id ? action.payload : task
     //   //   );
-    //   //   state.tasks = [...state.tasks, action.payload];
+    //   //   state.tasks = [.. .state.tasks, action.payload];
     //   //   Object.assign(state, {
     //   //     id,
     //   //     completed,
