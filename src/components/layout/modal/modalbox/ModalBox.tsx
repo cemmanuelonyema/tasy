@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Todo } from "../../../model";
+import { nanoid } from "@reduxjs/toolkit";
+// import { Todo } from "../../../model";
 import "./modalbox.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -18,6 +19,19 @@ interface Props {
 
 export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
   const currentTask = useSelector(selectCurrentTask);
+  const dispatch = useDispatch();
+
+  //local state
+
+  const [task, setTask] = useState({
+    id: null,
+    title: "",
+    description: "",
+    tag: "",
+    completed: false,
+  });
+
+  const { title, description, tag, id, completed } = task;
 
   //   const updateTask = () => {
   //     dispatch(updateTask(task));
@@ -28,51 +42,82 @@ export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
   //   const addTask = () => {
 
   //   };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // currentTask ? updateTask() : addTask();
-    if (currentTask === null) {
-      dispatch(addTask(task));
-      dispatch(toggleModal());
+  const handleAddTask = () => {
+    if (currentTask === null && title && description && tag) {
+      dispatch(
+        addTask({
+          id: nanoid(),
+          title,
+          description,
+          tag,
+          completed,
+        })
+      );
     }
-    if (currentTask !== null) {
-      dispatch(updateTask(task));
-      console.log(task);
-      dispatch(clearEditTask());
-      dispatch(toggleModal());
-    }
-
     setTask({
-      id: 0,
+      id: null,
       title: "",
       description: "",
       tag: "",
       completed: false,
     });
+
+    dispatch(toggleModal());
   };
 
+  const handleUpdateTask = () => {
+    if (currentTask !== null) {
+      dispatch(toggleModal());
+      dispatch(updateTask([task]));
+      console.log(task);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // if (currentTask === null) {
+    //   handleAddTask();
+    // }
+
+    currentTask === null ? handleAddTask() : handleUpdateTask();
+  };
+
+  //   const handleSubmit = (e: React.FormEvent) => {
+  //     e.preventDefault();
+
+  //     // currentTask ? updateTask() : addTask();
+  //     if (currentTask === null) {
+  //       dispatch(addTask(task));
+  //       dispatch(toggleModal());
+  //     }
+  //     if (currentTask !== null) {
+  //       dispatch(updateTask(task));
+  //       console.log(task);
+  //       dispatch(clearEditTask());
+  //       dispatch(toggleModal());
+  //     }
+
+  //     setTask({
+  //       id: 0,
+  //       title: "",
+  //       description: "",
+  //       tag: "",
+  //       completed: false,
+  //     });
+  //   };
+
+  //   const handleChange = (e: React.FormEvent) =>
+  //     setTask({ ...task, [e.target.name]: e.target.value, id: Date.now() });
+
   const handleChange = (e: React.FormEvent) =>
-    setTask({ ...task, [e.target.name]: e.target.value, id: Date.now() });
-
-  const dispatch = useDispatch();
-
-  const [task, setTask] = useState({
-    id: 0,
-    title: "",
-    description: "",
-    tag: "",
-    completed: false,
-  });
-
-  const { title, description, tag } = task;
+    setTask({ ...task, [e.target.name]: e.target.value });
 
   useEffect(() => {
     currentTask !== null
       ? setTask(currentTask)
       : setTask({
-          id: 0,
+          id: null,
           title: "",
           description: "",
           tag: "",

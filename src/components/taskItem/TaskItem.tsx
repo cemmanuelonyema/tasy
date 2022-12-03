@@ -1,37 +1,41 @@
 import React, { useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
-import { TaskModel, Todo } from "../model";
 import "./taskItem.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
   clearEditTask,
   deleteTask,
-  editTask,
+  updateTask,
   toggleModal,
+  editTask,
 } from "../../redux/slices/taskSlice";
+import { TaskModel } from "../model";
 
 interface Props {
-  todo: Todo;
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  modalOpen: boolean;
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  task: TaskModel;
+  //   todos: TaskModel[];
+  //   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  //   modalOpen: boolean;
+  //   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
-  const [edit, setEdit] = useState<boolean>(false);
-  const [editTodo, setEditTodo] = useState<string>(todo.todo);
+export const TaskItem: React.FC<Props> = ({ task }) => {
+  console.log(task);
+  const dispatch = useDispatch();
 
-  const handleChange = (id: number) => {
-    // setContact({ ...contact, [e.target.name]: e.target.value });
+  //   const [edit, setEdit] = useState<boolean>(false);
+  //   const [editTodo, setEditTodo] = useState<string>(todo.todo);
 
-    setTodos(
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
-      )
-    );
-  };
+  //   const handleChange = (id: number) => {
+  //     // setContact({ ...contact, [e.target.name]: e.target.value });
+
+  //     setTodos(
+  //       todos.map((todo) =>
+  //         todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+  //       )
+  //     );
+  //   };
 
   //   const handleDelete = (id: number) => {
   //     setTodos(todos.filter((todo) => todo.id !== id));
@@ -47,7 +51,6 @@ export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
     dispatch(clearEditTask());
   };
 
-  const dispatch = useDispatch();
   //   dispatch(deleteTask(todo.id));
 
   return (
@@ -55,25 +58,20 @@ export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
       <div className="task-content">
         <input
           type="checkbox"
-          onChange={() => handleChange(todo.id)}
-          id={todo.todo}
-          name={todo.todo}
+          //   onChange={() => handleChange(todo.id)}
+          //   id={todo.todo}
+          //   name={todo.todo}
         />
-        {edit ? (
-          <input />
-        ) : todo.isDone ? (
-          <span className="text-complete">{todo.isDone}</span>
-        ) : (
-          <span className="text-todo">{todo.title}</span>
-        )}
+
+        <span className="text-todo">{task.title}</span>
       </div>
       <div className="task-buttons">
-        <span className="icon" onClick={() => handleEdit(todo)}>
+        <span className="icon" onClick={() => handleEdit(task)}>
           <FiEdit />
         </span>
         <span
           className="icon"
-          onClick={() => handleDelete(deleteTask(todo.id))}
+          onClick={() => handleDelete(deleteTask(task.id))}
         >
           <FiTrash />
         </span>

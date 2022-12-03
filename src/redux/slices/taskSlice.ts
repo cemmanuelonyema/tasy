@@ -34,6 +34,7 @@ export const taskSlice = createSlice({
       //   state.tasks = [action.payload, ...state.tasks];
       state.tasks.push(action.payload);
     },
+
     deleteTask(state, action) {
       //   const taskId = action.payload;
       //   state.tasks = state.tasks.filter((task) => task.id !== taskId);
@@ -41,38 +42,58 @@ export const taskSlice = createSlice({
       state.tasks.splice(
         state.tasks.findIndex((task) => task.id === action.payload)
       );
+
       console.log(current(state));
       console.log(action.payload);
     },
-    updateTask(state, action) {
+    updateTask: (state, action) => {
       console.log(action.payload);
-      //   state.tasks = state.tasks.map((task) =>
-      //     task.id === action.payload.id ? action.payload : task
-      //   );
-      //   state.tasks = [...state.tasks, action.payload];
-      //   Object.assign(state, {
-      //     id,
-      //     completed,
-      //     taskDescription,
-      //     taskTitle,
-      //     tag,
-      //   });
-      //   const { id, taskTitle, taskDescription, completed, taskTag } =
-      //     action.payload;
-      //   const existingTask = state.tasks.find((task) => task.id === id);
-      //   console.log(existingTask);
-      //   console.log(id);
-      //   console.log(current(state.tasks));
-      //   if (existingTask) {
-      //     existingTask.completed = completed;
-      //     existingTask.taskDescription = taskDescription;
-      //     existingTask.taskTitle = taskTitle;
-      //     existingTask.taskTag = taskTag;
-      //     console.log(existingTask);
-      //   }
-      //   let arr = state.tasks;
-      //   const newArr = action.payload;
+      const { id } = action.payload[0];
+      console.log(id);
+      const task = state.tasks.find((task) => task.id === id);
+      console.log(current(task));
+      if (task) {
+        const { title, description, tag, completed } = action.payload;
+        task.title = title;
+        task.description = description;
+        task.tag = tag;
+        task.completed = completed;
+      }
     },
+    // updateTask(state, action) {
+    //   console.log(action.payload);
+    //   //   state.tasks = state.tasks.map((task) =>
+    //   //     task.id === action.payload.id ? action.payload : task
+    //   //   );
+    //   //   state.tasks = [...state.tasks, action.payload];
+    //   //   Object.assign(state, {
+    //   //     id,
+    //   //     completed,
+    //   //     taskDescription,
+    //   //     taskTitle,
+    //   //     tag,
+    //   //   });
+    //   //   const { id, taskTitle, taskDescription, completed, taskTag } =
+    //   //     action.payload;
+    //   //   const existingTask = state.tasks.find((task) => task.id === id);
+    //   //   console.log(existingTask);
+    //   //   console.log(id);
+    //   //   console.log(current(state.tasks));
+    //   //   if (existingTask) {
+    //   //     existingTask.completed = completed;
+    //   //     existingTask.taskDescription = taskDescription;
+    //   //     existingTask.taskTitle = taskTitle;
+    //   //     existingTask.taskTag = taskTag;
+    //   //     console.log(existingTask);
+    //   //   }
+    //   //   let arr = state.tasks;
+    //   //   const newArr = action.payload;
+
+    //   let arr = state.tasks;
+    //   const obj = action.payload;
+    //   arr = obj;
+    // },
+
     completeTask(state) {
       //   state.isModalOpen = !state.isModalOpen;
     },
