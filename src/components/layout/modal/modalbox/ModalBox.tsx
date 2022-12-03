@@ -36,8 +36,10 @@ export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
     if (currentTask === null) {
       dispatch(addTask(task));
       dispatch(toggleModal());
-    } else {
+    }
+    if (currentTask !== null) {
       dispatch(updateTask(task));
+      console.log(task);
       dispatch(clearEditTask());
       dispatch(toggleModal());
     }

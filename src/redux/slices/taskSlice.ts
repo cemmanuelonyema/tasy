@@ -31,11 +31,13 @@ export const taskSlice = createSlice({
     },
     addTask(state, action) {
       //   state.isModalOpen = !state.isModalOpen;
-      state.tasks = [action.payload, ...state.tasks];
+      //   state.tasks = [action.payload, ...state.tasks];
+      state.tasks.push(action.payload);
     },
     deleteTask(state, action) {
       //   const taskId = action.payload;
       //   state.tasks = state.tasks.filter((task) => task.id !== taskId);
+
       state.tasks.splice(
         state.tasks.findIndex((task) => task.id === action.payload)
       );
@@ -43,9 +45,33 @@ export const taskSlice = createSlice({
       console.log(action.payload);
     },
     updateTask(state, action) {
-      state.tasks.map((task) =>
-        task.id === action.payload.id ? action.payload : task
-      );
+      console.log(action.payload);
+      //   state.tasks = state.tasks.map((task) =>
+      //     task.id === action.payload.id ? action.payload : task
+      //   );
+      //   state.tasks = [...state.tasks, action.payload];
+      //   Object.assign(state, {
+      //     id,
+      //     completed,
+      //     taskDescription,
+      //     taskTitle,
+      //     tag,
+      //   });
+      //   const { id, taskTitle, taskDescription, completed, taskTag } =
+      //     action.payload;
+      //   const existingTask = state.tasks.find((task) => task.id === id);
+      //   console.log(existingTask);
+      //   console.log(id);
+      //   console.log(current(state.tasks));
+      //   if (existingTask) {
+      //     existingTask.completed = completed;
+      //     existingTask.taskDescription = taskDescription;
+      //     existingTask.taskTitle = taskTitle;
+      //     existingTask.taskTag = taskTag;
+      //     console.log(existingTask);
+      //   }
+      //   let arr = state.tasks;
+      //   const newArr = action.payload;
     },
     completeTask(state) {
       //   state.isModalOpen = !state.isModalOpen;
