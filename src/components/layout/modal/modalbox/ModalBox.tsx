@@ -69,6 +69,7 @@ export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
     if (currentTask !== null) {
       dispatch(toggleModal());
       dispatch(updateTask(task));
+      dispatch(clearEditTask());
       console.log(task);
     }
   };
@@ -159,7 +160,7 @@ export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
           {currentTask ? (
             <>
               <button onClick={() => dispatch(toggleModal())}>Cancel</button>
-              <button onClick={() => dispatch(clearEditTask())}>
+              <button onClick={() => dispatch(clearEditTask(task.id))}>
                 Clear Task
               </button>
             </>

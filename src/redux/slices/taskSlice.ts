@@ -26,8 +26,10 @@ export const taskSlice = createSlice({
       //   state.isModalOpen = !state.isModalOpen;
       state.currentTask = action.payload;
     },
-    clearEditTask(state) {
+
+    clearEditTask(state, action) {
       state.currentTask = null;
+      //   state.tasks = state.tasks.filter((task) => task.id === action.payload);
     },
     addTask(state, action) {
       //   state.isModalOpen = !state.isModalOpen;
@@ -42,6 +44,8 @@ export const taskSlice = createSlice({
       state.tasks.splice(
         state.tasks.findIndex((task) => task.id === action.payload)
       );
+
+      //   state.currentTask = null;
 
       console.log(current(state));
       console.log(action.payload);
@@ -63,7 +67,8 @@ export const taskSlice = createSlice({
         task.tag = tag;
         task.completed = completed;
       }
-      state.currentTask = null;
+
+      //   state.currentTask = null;
     },
     // updateTask(state, action) {
     //   console.log(action.payload);

@@ -46,10 +46,10 @@ export const TaskItem: React.FC<Props> = ({ task }) => {
     dispatch(editTask(currentTask));
   };
 
-  const handleDelete = (id: number) => {
-    dispatch(deleteTask(id));
-    dispatch(clearEditTask());
-  };
+  //   const handleDelete = () => {
+  //     dispatch(deleteTask(task.id));
+  //     // dispatch(clearEditTask());
+  //   };
 
   //   dispatch(deleteTask(todo.id));
 
@@ -69,10 +69,7 @@ export const TaskItem: React.FC<Props> = ({ task }) => {
         <span className="icon" onClick={() => handleEdit(task)}>
           <FiEdit />
         </span>
-        <span
-          className="icon"
-          onClick={() => handleDelete(deleteTask(task.id))}
-        >
+        <span className="icon" onClick={() => dispatch(deleteTask(task.id))}>
           <FiTrash />
         </span>
       </div>
