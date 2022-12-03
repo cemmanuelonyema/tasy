@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { FiEdit, FiTrash } from "react-icons/fi";
-import { Todo } from "../model";
+import { TaskModel, Todo } from "../model";
 import "./taskItem.css";
 
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTask, toggleModal } from "../../redux/slices/taskSlice";
+import {
+  clearEditTask,
+  deleteTask,
+  editTask,
+  toggleModal,
+} from "../../redux/slices/taskSlice";
 
 interface Props {
   todo: Todo;
@@ -32,8 +37,14 @@ export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
   //     setTodos(todos.filter((todo) => todo.id !== id));
   //   };
 
-  const handleEdit = (id: number) => {
+  const handleEdit = (currentTask: TaskModel) => {
     dispatch(toggleModal());
+    dispatch(editTask(currentTask));
+  };
+
+  const handleDelete = (id: number) => {
+    dispatch(deleteTask(id));
+    dispatch(clearEditTask());
   };
 
   const dispatch = useDispatch();
@@ -57,10 +68,13 @@ export const TaskItem: React.FC<Props> = ({ todo, todos, setTodos }) => {
         )}
       </div>
       <div className="task-buttons">
-        <span className="icon" onClick={() => handleEdit(todo.id)}>
+        <span className="icon" onClick={() => handleEdit(todo)}>
           <FiEdit />
         </span>
-        <span className="icon" onClick={() => dispatch(deleteTask(todo.id))}>
+        <span
+          className="icon"
+          onClick={() => handleDelete(deleteTask(todo.id))}
+        >
           <FiTrash />
         </span>
       </div>

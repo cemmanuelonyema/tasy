@@ -1,4 +1,4 @@
-export interface TodoModel {
+export interface TaskModel {
   id: number;
   taskTitle: string;
   taskDescription?: string;

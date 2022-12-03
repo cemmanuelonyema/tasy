@@ -1,20 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Todo } from "../../../model";
 import "./modalbox.css";
-import { useDispatch } from "react-redux";
-import { addTask, toggleModal } from "../../../../redux/slices/taskSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addTask,
+  clearEditTask,
+  selectCurrentTask,
+  toggleModal,
+  updateTask,
+} from "../../../../redux/slices/taskSlice";
+import { TaskModel } from "../../../../models/models";
 
 interface Props {
-  todos: Todo[];
+  todos: TaskModel[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
 export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
+  const currentTask = useSelector(selectCurrentTask);
+
+  //   const updateTask = () => {
+  //     dispatch(updateTask(task));
+  //     dispatch(clearEditTask());
+  //     dispatch(toggleModal());
+  //   };
+
+  //   const addTask = () => {
+
+  //   };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (task.title !== "") {
+    // currentTask ? updateTask() : addTask();
+    if (currentTask === null) {
       dispatch(addTask(task));
+      dispatch(toggleModal());
+    } else {
+      dispatch(updateTask(task));
+      dispatch(clearEditTask());
+      dispatch(toggleModal());
     }
 
     setTask({
@@ -41,11 +66,23 @@ export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
 
   const { title, description, tag } = task;
 
+  useEffect(() => {
+    currentTask !== null
+      ? setTask(currentTask)
+      : setTask({
+          id: 0,
+          title: "",
+          description: "",
+          tag: "",
+          completed: false,
+        });
+  }, [currentTask]);
+
   return (
     <div className="modalbox">
       <form className="form" onSubmit={handleSubmit}>
         <div className="box-header">
-          <h2>New Task</h2>
+          <h2>{currentTask ? "Edit Task" : "Add New Task"}</h2>
           <select name="tag" value={tag} onChange={handleChange}>
             <option value="Family">Personal</option>
             <option value="professional">Professional</option>
@@ -71,8 +108,16 @@ export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
         </div>
 
         <div className="btns">
-          <button onClick={() => dispatch(toggleModal())}>Cancel</button>
-          <button onClick={handleSubmit}>Add task</button>
+          {currentTask ? (
+            <button onClick={() => dispatch(clearEditTask())}>
+              Clear Task
+            </button>
+          ) : (
+            <button onClick={() => dispatch(toggleModal())}>Cancel</button>
+          )}
+          <button onClick={handleSubmit}>
+            {currentTask ? "Update Task" : "Add Task"}
+          </button>
         </div>
       </form>
     </div>
