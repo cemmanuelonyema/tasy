@@ -131,7 +131,8 @@ export const ModalBox: React.FC<Props> = ({ setTodos, todos }) => {
         <div className="box-header">
           <h2>{currentTask ? "Edit Task" : "Add New Task"}</h2>
           <select name="tag" value={tag} onChange={handleChange}>
-            <option value="Family">Personal</option>
+            <option value="">Task tag</option>
+            <option value="Personal">Personal</option>
             <option value="professional">Professional</option>
             <option value="School">School</option>
             <option value="Business">Business</option>
