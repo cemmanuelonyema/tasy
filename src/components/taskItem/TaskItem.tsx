@@ -1,67 +1,35 @@
-import React, { useState } from "react";
+//imports
+import React from "react";
+import { useDispatch } from "react-redux";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import "./taskItem.css";
-
-import { useSelector, useDispatch } from "react-redux";
+import { TaskModel } from "../../model/model";
 import {
-  clearEditTask,
   deleteTask,
-  updateTask,
   toggleModal,
   editTask,
 } from "../../redux/slices/taskSlice";
-import { TaskModel } from "../model";
 
+//interface
 interface Props {
   task: TaskModel;
-  //   todos: TaskModel[];
-  //   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  //   modalOpen: boolean;
-  //   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const TaskItem: React.FC<Props> = ({ task }) => {
-  console.log(task);
+  //hooks
   const dispatch = useDispatch();
 
-  //   const [edit, setEdit] = useState<boolean>(false);
-  //   const [editTodo, setEditTodo] = useState<string>(todo.todo);
-
-  //   const handleChange = (id: number) => {
-  //     // setContact({ ...contact, [e.target.name]: e.target.value });
-
-  //     setTodos(
-  //       todos.map((todo) =>
-  //         todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
-  //       )
-  //     );
-  //   };
-
-  //   const handleDelete = (id: number) => {
-  //     setTodos(todos.filter((todo) => todo.id !== id));
-  //   };
-
+  //methods
   const handleEdit = (currentTask: TaskModel) => {
     dispatch(toggleModal());
     dispatch(editTask(currentTask));
   };
 
-  //   const handleDelete = () => {
-  //     dispatch(deleteTask(task.id));
-  //     // dispatch(clearEditTask());
-  //   };
-
-  //   dispatch(deleteTask(todo.id));
-
+  //return
   return (
     <li className="taskItem">
       <div className="task-content">
-        <input
-          type="checkbox"
-          //   onChange={() => handleChange(todo.id)}
-          //   id={todo.todo}
-          //   name={todo.todo}
-        />
+        <input type="checkbox" />
 
         <span className="text-todo">{task.title}</span>
       </div>

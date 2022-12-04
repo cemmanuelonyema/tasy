@@ -4,12 +4,7 @@ import "./header.css";
 import { useDispatch } from "react-redux";
 import { toggleModal } from "../../redux/slices/taskSlice";
 
-interface Props {
-  modalOpen: boolean;
-  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const Header: React.FC<Props> = ({ modalOpen, setModalOpen }) => {
+export const Header: React.FC = () => {
   const dispatch = useDispatch();
   return (
     <header className="header">

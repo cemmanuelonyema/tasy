@@ -5,8 +5,3 @@ export interface TaskModel {
   tag: string;
   completed: boolean;
 }
-
-export interface TaskState {
-  tasks: TaskModel[];
-  task: TaskModel;
-}
