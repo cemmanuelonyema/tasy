@@ -1,4 +1,5 @@
 import { createSlice, createSelector, current } from "@reduxjs/toolkit";
+import { FiTag } from "react-icons/fi";
 import { TaskModel } from "../../model/model";
 
 interface TaskState {
@@ -6,6 +7,7 @@ interface TaskState {
   tasks: TaskModel[];
   currentTask: TaskModel | null;
   completedTasks: TaskModel[];
+  filtered: TaskModel[] | null;
 }
 
 const initialState: TaskState = {
@@ -13,6 +15,7 @@ const initialState: TaskState = {
   tasks: [],
   currentTask: null,
   completedTasks: [],
+  filtered: null,
 };
 
 export const taskSlice = createSlice({
@@ -67,6 +70,9 @@ export const taskSlice = createSlice({
     },
 
     completeTask: (state) => {},
+    clearSearch: (state) => {
+      state.filtered = null;
+    },
     searchTask: (state, action) => {
       console.log(action.payload);
       const query = action.payload;
@@ -75,6 +81,18 @@ export const taskSlice = createSlice({
           task.title.toLowerCase().includes(query)
         );
         state.tasks = updatedTaskArr;
+      }
+      if (query !== "") {
+        const filtered = state.tasks.filter((task) => {
+          const regex = new RegExp(`${query}`, "gi");
+          console.log("payload:", query);
+          const title = task.title.match(regex);
+          const description = task.description.match(regex);
+          const tag = task.tag.match(regex);
+          console.log("title:", title, "des:", description, "tag", tag);
+          return title || description || tag;
+        });
+        state.filtered = filtered;
       }
     },
   },
@@ -98,6 +116,10 @@ export const selectIsModalOpen = createSelector(
   (task) => task.isModalOpen
 );
 export const selectTasks = createSelector([selectTask], (task) => task.tasks);
+export const selectFiltered = createSelector(
+  [selectTask],
+  (task) => task.filtered
+);
 export const selectCurrentTask = createSelector(
   [selectTask],
   (task) => task.currentTask

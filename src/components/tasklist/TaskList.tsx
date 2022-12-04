@@ -1,5 +1,5 @@
 import React from "react";
-import { selectTasks } from "../../redux/slices/taskSlice";
+import { selectFiltered, selectTasks } from "../../redux/slices/taskSlice";
 import { TaskModel } from "../model";
 import { TaskItem } from "../taskItem/TaskItem";
 import "./tasklist.css";
@@ -12,21 +12,17 @@ import { useSelector } from "react-redux";
 //   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 // }
 
-export const TaskList: React.FC = (
-  {
-    //   todos,
-    //   setTodos,
-    //   modalOpen,
-    //   setModalOpen,
-  }
-) => {
+export const TaskList: React.FC = () => {
+  //hooks
   const tasks: TaskModel[] = useSelector(selectTasks);
+  const filtered: TaskModel[] = useSelector(selectFiltered);
   console.log(tasks);
+  const renderTasks = filtered ? filtered : tasks;
   return (
     <section className="tasklist">
       <div className="tasklist__container">
         <ul className="tasklist-ul">
-          {tasks?.map((task: TaskModel) => (
+          {renderTasks?.map((task: TaskModel) => (
             <TaskItem key={task.id} task={task} />
           ))}
         </ul>
