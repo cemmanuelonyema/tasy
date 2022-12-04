@@ -2,14 +2,14 @@
 import { useState, useEffect, useRef } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import { TaskModel } from "../../../../model/model";
+import { TaskModel } from "../../../model/model";
 import "./taskform.css";
 import {
   addTask,
   selectCurrentTask,
   toggleModal,
   updateTask,
-} from "../../../../redux/slices/taskSlice";
+} from "../../../redux/slices/taskSlice";
 
 export const Taskform: React.FC = () => {
   //hooks

@@ -2,7 +2,7 @@
 import React from "react";
 import "./App.css";
 import { Header } from "./components/header/Header";
-import { Modal } from "./components/layout/modal/Modal";
+import { Modal } from "./components/modal/Modal";
 import { Tab } from "./components/tab/Tab";
 import { TaskList } from "./components/tasklist/TaskList";
 
