@@ -1,8 +1,9 @@
 //imports
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
-import "./modalbox.css";
+import { TaskModel } from "../../../../model/model";
+import "./taskform.css";
 import {
   addTask,
   selectCurrentTask,
@@ -10,13 +11,16 @@ import {
   updateTask,
 } from "../../../../redux/slices/taskSlice";
 
-export const ModalBox: React.FC = () => {
+export const Taskform: React.FC = () => {
+  //hooks
   const currentTask = useSelector(selectCurrentTask);
   const dispatch = useDispatch();
+  //refs
+  const taskTitle = useRef<HTMLInputElement>(null);
 
   //local state
-  const [task, setTask] = useState({
-    id: null,
+  const [task, setTask] = useState<TaskModel>({
+    id: "",
     title: "",
     description: "",
     tag: "",
@@ -47,7 +51,7 @@ export const ModalBox: React.FC = () => {
 
     //then empty task state for next task
     setTask({
-      id: null,
+      id: "",
       title: "",
       description: "",
       tag: "",
@@ -76,12 +80,14 @@ export const ModalBox: React.FC = () => {
     currentTask !== null
       ? setTask(currentTask)
       : setTask({
-          id: null,
+          id: "",
           title: "",
           description: "",
           tag: "",
           completed: false,
         });
+
+    taskTitle.current?.focus();
   }, [currentTask]);
 
   //return
@@ -100,6 +106,7 @@ export const ModalBox: React.FC = () => {
         </div>
         <div>
           <input
+            ref={taskTitle}
             type="text"
             placeholder="Task name"
             value={title}

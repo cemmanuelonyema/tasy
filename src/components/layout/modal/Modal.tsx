@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import "./modal.css";
-import { ModalBox } from "./modalbox/ModalBox";
+import { Taskform } from "./taskform/Taskform";
 import { selectIsModalOpen } from "../../../redux/slices/taskSlice";
 
 export const Modal: React.FC = () => {
@@ -14,7 +14,7 @@ export const Modal: React.FC = () => {
     <Fragment>
       {isModalOpen && (
         <section className="overlay">
-          <ModalBox />
+          <Taskform />
         </section>
       )}
     </Fragment>
