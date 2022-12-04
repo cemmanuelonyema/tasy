@@ -76,21 +76,14 @@ export const taskSlice = createSlice({
     searchTask: (state, action) => {
       console.log(action.payload);
       const query = action.payload;
-      if (query !== "") {
-        const updatedTaskArr = state.tasks.filter((task) =>
-          task.title.toLowerCase().includes(query)
-        );
-        state.tasks = updatedTaskArr;
-      }
-      if (query !== "") {
-        const filtered = state.tasks.filter((task) => {
+
+      if (query === "" || !query) return;
+
+      if (query !== "" && query) {
+        const filtered = state.tasks.filter((task: TaskModel) => {
           const regex = new RegExp(`${query}`, "gi");
-          console.log("payload:", query);
           const title = task.title.match(regex);
-          const description = task.description.match(regex);
-          const tag = task.tag.match(regex);
-          console.log("title:", title, "des:", description, "tag", tag);
-          return title || description || tag;
+          return title;
         });
         state.filtered = filtered;
       }
@@ -105,6 +98,7 @@ export const {
   addTask,
   updateTask,
   searchTask,
+  clearSearch,
 } = taskSlice.actions;
 export default taskSlice.reducer;
 ////////////////////////////////////////////////////////////
