@@ -67,11 +67,27 @@ export const taskSlice = createSlice({
     },
 
     completeTask: (state) => {},
+    searchTask: (state, action) => {
+      console.log(action.payload);
+      const query = action.payload;
+      if (query !== "") {
+        const updatedTaskArr = state.tasks.filter((task) =>
+          task.title.toLowerCase().includes(query)
+        );
+        state.tasks = updatedTaskArr;
+      }
+    },
   },
 });
 
-export const { toggleModal, editTask, deleteTask, addTask, updateTask } =
-  taskSlice.actions;
+export const {
+  toggleModal,
+  editTask,
+  deleteTask,
+  addTask,
+  updateTask,
+  searchTask,
+} = taskSlice.actions;
 export default taskSlice.reducer;
 ////////////////////////////////////////////////////////////
 //Selectors
