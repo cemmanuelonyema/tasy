@@ -1,4 +1,5 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
+import { FaTimes } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import {
   clearSearch,
@@ -24,21 +25,30 @@ export const SearchForm: React.FC = () => {
     setQuery(e.target.value);
     console.log(query);
   };
-  console.log(query);
-
+  const handleClear = () => {
+    setQuery("");
+    dispatch(clearSearch());
+  };
   useEffect(() => {
     query !== "" ? dispatch(searchTask(query)) : null;
     console.log(query);
   }, [query]);
 
   return (
-    <form className="task-function" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Search tasks"
-        onChange={handleChange}
-        value={query}
-      />
+    <form className="search-form" onSubmit={handleSubmit}>
+      <div className="search-group">
+        <input
+          type="text"
+          placeholder="Search tasks"
+          onChange={handleChange}
+          value={query}
+        />
+        {query !== "" ? (
+          <FaTimes className="clear-icon" onClick={handleClear} />
+        ) : (
+          ""
+        )}
+      </div>
       <button onClick={() => dispatch(toggleModal())}>Add a task</button>
     </form>
   );

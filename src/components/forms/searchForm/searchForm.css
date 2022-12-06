@@ -1,19 +1,33 @@
-.task-function {
+.search-form {
   display: flex;
+  justify-content: space-between;
   gap: 2.4rem;
 }
 
-.task-function input {
+.search-group {
   width: 70%;
-  padding: 1.2rem;
-  border-radius: 1.2rem;
-  border: none;
-  outline: none;
-
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  display: flex;
+  gap: 1rem;
+  padding: 5px 1rem;
+  border: 1px solid black;
   background-color: #f7f7f7;
+  border-radius: 1.2rem;
+}
+.clear-icon {
+  /* padding: 1rem; */
 }
 
-.task-function button {
+.search-form input {
+  padding: 1.2rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.search-form button {
   width: 30%;
   padding: 1.2rem;
   border-radius: 1.2rem;
