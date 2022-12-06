@@ -20,19 +20,20 @@ export const SearchForm: React.FC = () => {
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // console.log(query);
     const query = e.target.value;
     setQuery(e.target.value);
-    console.log(query);
+    if (!query) return;
+    dispatch(searchTask(query));
   };
   const handleClear = () => {
     setQuery("");
     dispatch(clearSearch());
   };
-  useEffect(() => {
-    query !== "" ? dispatch(searchTask(query)) : null;
-    console.log(query);
-  }, [query]);
+
+  //   useEffect(() => {
+  //     query !== "" ? dispatch(searchTask(query)) : null;
+  //     console.log(query);
+  //   }, [query]);
 
   return (
     <form className="search-form" onSubmit={handleSubmit}>
