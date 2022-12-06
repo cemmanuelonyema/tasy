@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import {
   clearSearch,
@@ -18,8 +18,9 @@ export const SearchForm: React.FC = () => {
     e.preventDefault();
   };
 
-  const handleChange = (e: React.FormEvent) => {
-    console.log(query);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // console.log(query);
+    const query = e.target.value;
     setQuery(e.target.value);
     console.log(query);
   };

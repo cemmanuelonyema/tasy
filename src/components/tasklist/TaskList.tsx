@@ -1,6 +1,6 @@
 import React from "react";
 import { selectFiltered, selectTasks } from "../../redux/slices/taskSlice";
-import { TaskModel } from "../model";
+import { TaskModel } from "../../model/model";
 import { TaskItem } from "../taskItem/TaskItem";
 import "./tasklist.css";
 import { useSelector } from "react-redux";
@@ -26,16 +26,7 @@ export const TaskList: React.FC = () => {
           )}
         </ul>
 
-        <ul className="tasklist-ul">
-          {/* {todos?.map((todo) => (
-            <TaskItem
-              key={todo.id}
-              todo={todo}
-              todos={todos}
-              setTodos={setTodos}
-            />
-          ))} */}
-        </ul>
+        <ul className="tasklist-ul completed"></ul>
       </div>
     </section>
   );
