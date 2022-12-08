@@ -26,8 +26,8 @@ export const TaskItem: React.FC<Props> = ({ task }) => {
     dispatch(editTask(currentTask));
   };
 
-  const handleCheckbox = (id: string) => {
-    dispatch(completeTask(task.id));
+  const handleCheckbox = (task: TaskModel) => {
+    dispatch(completeTask(task));
     // dispatch(deleteTask(task.id));
   };
 
@@ -35,7 +35,7 @@ export const TaskItem: React.FC<Props> = ({ task }) => {
   return (
     <li className="taskItem">
       <div className="task-content">
-        <input type="checkbox" onClick={() => handleCheckbox(task.id)} />
+        <input type="checkbox" onClick={() => handleCheckbox(task)} />
 
         <span className="text-todo">{task.title}</span>
       </div>

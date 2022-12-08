@@ -70,10 +70,14 @@ export const taskSlice = createSlice({
     },
 
     completeTask: (state, action) => {
-      const taskId = action.payload;
-      const completeTasks = state.tasks.filter((task) => task.id === taskId);
-      const newCompleteArr = [completeTasks, ...state.completedTasks];
-      state.completedTasks = newCompleteArr;
+      const completeTask = action.payload;
+      const isDuplicate = state.completedTasks.find(
+        (task) => task.id === completeTask.id
+      );
+      if (!isDuplicate) {
+        const completeTaskArr = [completeTask, ...state.completedTasks];
+        state.completedTasks = completeTaskArr;
+      }
     },
     clearSearch: (state) => {
       state.filtered = null;

@@ -11,9 +11,7 @@ export const CompleteTaskItem: React.FC<Props> = ({ task }) => {
   return (
     <li className="taskItem">
       <div className="task-content">
-        <input type="checkbox" />
-
-        <span className="text-todo">{}</span>
+        <span className="text-todo">{task.title}</span>
       </div>
       <div className="task-buttons">
         <span className="icon">{/* <FiEdit /> */}</span>
