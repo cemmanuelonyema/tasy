@@ -8,6 +8,7 @@ import {
   deleteTask,
   toggleModal,
   editTask,
+  completeTask,
 } from "../../redux/slices/taskSlice";
 
 //interface
@@ -29,7 +30,10 @@ export const TaskItem: React.FC<Props> = ({ task }) => {
   return (
     <li className="taskItem">
       <div className="task-content">
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          onClick={() => dispatch(completeTask(task.id))}
+        />
 
         <span className="text-todo">{task.title}</span>
       </div>

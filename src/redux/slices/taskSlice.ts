@@ -69,7 +69,11 @@ export const taskSlice = createSlice({
       state.currentTask = null;
     },
 
-    completeTask: (state) => {},
+    completeTask: (state, action) => {
+      const taskId = action.payload;
+      const completeTasks = state.tasks.filter((task) => task.id !== taskId);
+      state.completedTasks = completeTasks;
+    },
     clearSearch: (state) => {
       state.filtered = null;
     },
@@ -99,6 +103,7 @@ export const {
   updateTask,
   searchTask,
   clearSearch,
+  completeTask,
 } = taskSlice.actions;
 export default taskSlice.reducer;
 ////////////////////////////////////////////////////////////
