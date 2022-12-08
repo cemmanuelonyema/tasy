@@ -1,15 +1,20 @@
 import React from "react";
-import { selectFiltered, selectTasks } from "../../redux/slices/taskSlice";
+import {
+  selectCompletedTask,
+  selectFiltered,
+  selectTasks,
+} from "../../redux/slices/taskSlice";
 import { TaskModel } from "../../model/model";
 import { TaskItem } from "../taskItem/TaskItem";
 import "./tasklist.css";
 import { useSelector } from "react-redux";
+import { CompleteTaskItem } from "../completeTaskItem/CompleteTaskItem";
 
 export const TaskList: React.FC = () => {
   //hooks
   const tasks: TaskModel[] = useSelector(selectTasks);
   const filtered: TaskModel[] = useSelector(selectFiltered);
-  console.log(tasks);
+  const completedTasks: TaskModel[] = useSelector(selectCompletedTask);
   const renderTasks = filtered ? filtered : tasks;
   return (
     <section className="tasklist">
@@ -26,7 +31,11 @@ export const TaskList: React.FC = () => {
           )}
         </ul>
 
-        <ul className="tasklist-ul completed"></ul>
+        <ul className="tasklist-ul completed">
+          {completedTasks?.map((task: TaskModel) => (
+            <CompleteTaskItem key={task.id} task={task} />
+          ))}
+        </ul>
       </div>
     </section>
   );

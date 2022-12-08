@@ -39,7 +39,7 @@ export const taskSlice = createSlice({
       //   state.tasks.push(action.payload);
     },
 
-    deleteTask(state, action) {
+    deleteTask: (state, action) => {
       const taskId = action.payload;
       //to avoid mutating state directly, operation assigned to updatedTask const
       const updatedTask = state.tasks.filter((task) => task.id !== taskId);
@@ -71,8 +71,9 @@ export const taskSlice = createSlice({
 
     completeTask: (state, action) => {
       const taskId = action.payload;
-      const completeTasks = state.tasks.filter((task) => task.id !== taskId);
-      state.completedTasks = completeTasks;
+      const completeTasks = state.tasks.filter((task) => task.id === taskId);
+      const newCompleteArr = [completeTasks, ...state.completedTasks];
+      state.completedTasks = newCompleteArr;
     },
     clearSearch: (state) => {
       state.filtered = null;
@@ -122,4 +123,9 @@ export const selectFiltered = createSelector(
 export const selectCurrentTask = createSelector(
   [selectTask],
   (task) => task.currentTask
+);
+
+export const selectCompletedTask = createSelector(
+  [selectTask],
+  (task) => task.completedTasks
 );
