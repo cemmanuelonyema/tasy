@@ -124,7 +124,7 @@ export const Taskform: React.FC = () => {
 
         <div className="btns">
           {currentTask ? (
-            <button onClick={() => dispatch(toggleModal())}>Cancel</button>
+            ""
           ) : (
             <button onClick={() => dispatch(toggleModal())}>Cancel</button>
           )}
