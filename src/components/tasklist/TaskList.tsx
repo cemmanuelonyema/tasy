@@ -20,10 +20,10 @@ export const TaskList: React.FC = () => {
     <section className="tasklist">
       <div className="tasklist__container">
         <ul className="tasklist-ul">
-          {filtered && filtered.length === 0 ? <h4>No contact matched</h4> : ""}
+          {filtered && filtered.length === 0 ? <h4>No task matched</h4> : ""}
 
           {tasks && tasks.length === 0 ? (
-            <h4>Please add contacts</h4>
+            <h4>Please add tasks</h4>
           ) : (
             renderTasks?.map((task: TaskModel) => (
               <TaskItem key={task.id} task={task} />

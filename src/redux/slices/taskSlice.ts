@@ -74,10 +74,19 @@ export const taskSlice = createSlice({
       const isDuplicate = state.completedTasks.find(
         (task) => task.id === completeTask.id
       );
+      // on task complete, add to completed task arr
       if (!isDuplicate) {
         const completeTaskArr = [completeTask, ...state.completedTasks];
         state.completedTasks = completeTaskArr;
       }
+      //then remove from active tasks
+      const updatedTask = state.tasks.filter(
+        (task) => task.id !== completeTask.id
+      );
+      state.tasks = updatedTask;
+
+      // clear any currentTask
+      state.currentTask = null;
     },
     clearSearch: (state) => {
       state.filtered = null;
